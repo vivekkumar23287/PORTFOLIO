@@ -32,6 +32,9 @@ export const metadata: Metadata = {
       "Full Stack Developer crafting elegant digital experiences.",
     type: "website",
   },
+  icons: {
+    icon: "/images/Vivek Kumar Logo.png",
+  },
 };
 
 export default function RootLayout({
