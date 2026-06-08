@@ -23,7 +23,7 @@ const Circle = forwardRef<
 
 Circle.displayName = "Circle";
 
-export default function SmartCareerBeam() {
+export default function NiftyLiveBeam() {
   const containerRef = useRef<HTMLDivElement>(null);
   const div1Ref = useRef<HTMLDivElement>(null);
   const div2Ref = useRef<HTMLDivElement>(null);
@@ -38,17 +38,25 @@ export default function SmartCareerBeam() {
         border: "1px solid rgba(255,255,255,0.06)",
       }}
     >
-      {/* Left: Admin Portal */}
-      <Circle ref={div1Ref}>
-        <img src="/images/ADMIN.png" alt="Admin Portal" className="w-full h-full object-contain rounded-full" />
+      {/* Left Circle: logo4 */}
+      <Circle ref={div1Ref} className="p-0">
+        <img
+          src="/images/logo4.png"
+          alt="Nifty50 Logo"
+          className="w-full h-full object-contain scale-[1.4]"
+        />
       </Circle>
 
-      {/* Right: Smart Career System */}
-      <Circle ref={div2Ref} className="p-0">
-        <img src="/images/Logo.png" alt="Smart Career Logo" className="w-full h-full object-contain rounded-full scale-[1.7]" />
+      {/* Right Circle: logo3 */}
+      <Circle ref={div2Ref}>
+        <img
+          src="/images/logo3.png"
+          alt="NSE Tracker Logo"
+          className="w-full h-full object-contain"
+        />
       </Circle>
 
-      {/* Beam 1: Admin → Smart Career (top curve) */}
+      {/* Beam 1: Left → Right */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={div1Ref}
@@ -56,10 +64,10 @@ export default function SmartCareerBeam() {
         startYOffset={10}
         endYOffset={10}
         curvature={-20}
-        gradientStartColor="#6366f1"
-        gradientStopColor="#10b981"
+        gradientStartColor="#f59e0b"
+        gradientStopColor="#ef4444"
       />
-      {/* Beam 2: Smart Career → Admin (bottom curve, reverse) */}
+      {/* Beam 2: Right → Left (reverse) */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={div1Ref}
@@ -68,8 +76,8 @@ export default function SmartCareerBeam() {
         endYOffset={-10}
         curvature={20}
         reverse
-        gradientStartColor="#10b981"
-        gradientStopColor="#6366f1"
+        gradientStartColor="#ef4444"
+        gradientStopColor="#f59e0b"
       />
     </div>
   );

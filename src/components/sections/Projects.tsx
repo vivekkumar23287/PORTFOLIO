@@ -6,6 +6,7 @@ import { SectionHeading } from "../ui/SectionHeading";
 import { ExternalLink, Star, MousePointer2 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import SmartCareerBeam from "./SmartCareerBeam";
+import NiftyLiveBeam from "./NiftyLiveBeam";
 
 interface Project {
   title: string;
@@ -18,6 +19,7 @@ interface Project {
   gradient: string;
   emoji: string;
   useBeam?: boolean;
+  logo?: string;
   screenshots?: string[];
 }
 
@@ -30,8 +32,9 @@ const projects: Project[] = [
     liveUrl: "https://your-portfolio-url.com", // You can update this once deployed
     githubUrl: "https://github.com/vivekkumar23287/portfolio", // Replace with actual repo if public
     featured: true,
-    gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+    gradient: "#ffffff",
     emoji: "✨",
+    logo: "/images/icon.png",
     screenshots: [
       "/images/PORTFOLIO IMAGE 1.png",
       "/images/PORTFOLIO IMAGE 2.png",
@@ -59,7 +62,7 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Nifty50 Live Tracker (In Progress)",
+    title: "Rapid RatioG",
     description:
       "A financial dashboard providing live prices and interactive charts for NSE Nifty50 and top 5 companies. Features integrated Excel support with download capabilities. (More details to be added).",
     technologies: ["React", "API Integration", "Chart.js", "ExcelJS"],
@@ -68,6 +71,7 @@ const projects: Project[] = [
     featured: false,
     gradient: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
     emoji: "📈",
+    useBeam: true,
     screenshots: [
       "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1200",
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200",
@@ -218,14 +222,28 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
         {/* Preview */}
         {project.useBeam ? (
           <div className="w-full shrink-0">
-            <SmartCareerBeam />
+            {project.title === "Smart Career Automation System" ? (
+              <SmartCareerBeam />
+            ) : (
+              <NiftyLiveBeam />
+            )}
           </div>
         ) : (
           <div
-            className="w-full h-[240px] rounded-2xl flex items-center justify-center shrink-0"
+            className="w-full h-[240px] rounded-2xl flex items-center justify-center shrink-0 overflow-hidden relative"
             style={{ background: project.gradient }}
           >
-            <span className="text-8xl">{project.emoji}</span>
+            {project.logo ? (
+              <div className="z-10 flex size-36 items-center justify-center rounded-full border border-gray-100 bg-white p-2 shadow-lg overflow-hidden">
+                <img
+                  src={project.logo}
+                  alt={`${project.title} Logo`}
+                  className="w-full h-full object-contain rounded-full"
+                />
+              </div>
+            ) : (
+              <span className="text-8xl">{project.emoji}</span>
+            )}
           </div>
         )}
 
