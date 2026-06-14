@@ -87,31 +87,44 @@ function EducationCard({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.7,
+        delay: index * 0.15,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    },
+    hover: {
+      y: -4,
+      boxShadow: "var(--shadow-lg)",
+      borderColor: "var(--accent)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
-      animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-      transition={{
-        duration: 0.7,
-        delay: index * 0.15,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      className="group relative rounded-3xl transition-all duration-300 shadow-lg"
+      variants={cardVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      whileHover="hover"
+      className="group relative rounded-3xl shadow-lg cursor-pointer"
       style={{
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
-        padding: "36px"
+        padding: "36px",
       }}
     >
-      <motion.div
-        whileHover={{
-          y: -4,
-          boxShadow: "var(--shadow-lg)",
-          borderColor: "var(--accent)",
-        }}
-        className="relative"
-      >
+      <div className="relative">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div className="flex gap-4">
             {/* Icon */}
@@ -188,7 +201,7 @@ function EducationCard({
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

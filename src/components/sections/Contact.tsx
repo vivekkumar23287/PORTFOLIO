@@ -9,32 +9,26 @@ import {
   MapPin,
   ArrowUpRight,
 } from "lucide-react";
-import { SiGithub, SiX } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 
 const socialLinks = [
   {
     name: "GitHub",
     icon: SiGithub,
-    url: "https://github.com/yourusername",
+    url: "https://github.com/vivekkumar23287",
     color: "#333",
   },
   {
     name: "LinkedIn",
     icon: FaLinkedinIn,
-    url: "https://linkedin.com/in/your-linkedin-profile",
+    url: "https://www.linkedin.com/in/vivekkumarr15911/",
     color: "#0077b5",
-  },
-  {
-    name: "X (Twitter)",
-    icon: SiX,
-    url: "https://twitter.com/yourusername",
-    color: "#000",
   },
   {
     name: "Email",
     icon: Mail,
-    url: "mailto:vk5400310@gmail.com",
+    url: "https://mail.google.com/mail/?view=cm&fs=1&to=vk5400310@gmail.com",
     color: "#ea4335",
   },
 ];
@@ -131,13 +125,16 @@ export default function Contact() {
                 <div className="h-14" />
 
                 <div className="space-y-6">
-                  <div
-                    className="flex items-center gap-3 text-sm"
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=vk5400310@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-sm hover:text-white transition-colors"
                     style={{ color: "var(--text-secondary)" }}
                   >
                     <Mail size={16} style={{ color: "#10b981" }} />
                     vk5400310@gmail.com
-                  </div>
+                  </a>
                   <div
                     className="flex items-center gap-3 text-sm"
                     style={{ color: "var(--text-secondary)" }}
@@ -183,12 +180,9 @@ export default function Contact() {
                       />
                       {/* Tooltip */}
                       <div
-                        className="absolute -top-9 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-[10px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                        className="absolute -top-9 left-1/2 -translate-x-1/2 text-[10px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
                         style={{
-                          background: "var(--bg-card)",
-                          border: "1px solid var(--border)",
                           color: "var(--text-primary)",
-                          boxShadow: "var(--shadow-sm)",
                         }}
                       >
                         {social.name}

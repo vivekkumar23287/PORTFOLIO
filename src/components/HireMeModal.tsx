@@ -33,7 +33,7 @@ const contactOptions = [
     hoverBg: "rgba(37, 211, 102, 0.05)",
     borderGlow: "rgba(37, 211, 102, 0.3)",
     action: () => {
-      window.open("https://wa.me/918318397757", "_blank");
+      window.open("https://wa.me/919470950144", "_blank");
     },
   },
   {

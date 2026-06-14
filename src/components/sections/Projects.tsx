@@ -29,8 +29,8 @@ const projects: Project[] = [
     description:
       "A premium, highly interactive portfolio website built from scratch. Features smooth scroll animations, glassmorphism design, and a fully responsive layout.",
     technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "GSAP"],
-    liveUrl: "https://your-portfolio-url.com", // You can update this once deployed
-    githubUrl: "https://github.com/vivekkumar23287/portfolio", // Replace with actual repo if public
+    liveUrl: "https://portfolio159.vercel.app/",
+    githubUrl: "https://github.com/vivekkumar23287/PORTFOLIO.git",
     featured: true,
     gradient: "#ffffff",
     emoji: "✨",
@@ -47,8 +47,8 @@ const projects: Project[] = [
     description:
       "A comprehensive platform designed to automate career-related processes. Built alongside a dedicated admin portal for database management and system oversight.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
-    liveUrl: "https://your-main-site.com", // Add actual live link
-    adminUrl: "https://your-admin-site.com", // Add actual admin link
+    liveUrl: "https://smart-career-automation159.vercel.app/",
+    adminUrl: "https://smart-career-automation-system-admi-tau.vercel.app/",
     githubUrl: "https://github.com/vivekkumar23287/Smart-Career-Automation.git",
     featured: true,
     gradient: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
@@ -66,17 +66,17 @@ const projects: Project[] = [
     description:
       "A financial dashboard providing live prices and interactive charts for NSE Nifty50 and top 5 companies. Features integrated Excel support with download capabilities. (More details to be added).",
     technologies: ["React", "API Integration", "Chart.js", "ExcelJS"],
-    liveUrl: "#", // Update with actual link later
-    githubUrl: "#", // Update with actual link later
+    liveUrl: "https://rapid-ratiog159.vercel.app/",
+    githubUrl: "https://github.com/vivekkumar23287/RAPID-RATIOG.git",
     featured: false,
     gradient: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
     emoji: "📈",
     useBeam: true,
     screenshots: [
-      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=1200",
+      "/images/rapid image 2.png",
+      "/images/rapid image 3.png",
+      "/images/rapid image 4.png",
+      "/images/rapid image1.png",
     ],
   },
 ];
@@ -88,7 +88,7 @@ export default function Projects() {
       className="relative overflow-hidden"
       style={{ 
         background: "var(--bg-secondary)",
-        paddingTop: "30px",
+        paddingTop: "80px",
         paddingBottom: "120px"
       }}
     >

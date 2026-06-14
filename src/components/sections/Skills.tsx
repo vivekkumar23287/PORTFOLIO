@@ -164,12 +164,9 @@ export default function Skills() {
                     />
                     {/* Tooltip */}
                     <div
-                      className="absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md text-[11px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+                      className="absolute -top-10 left-1/2 -translate-x-1/2 text-[11px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
                       style={{
-                        background: "var(--bg-card)",
-                        border: "1px solid var(--border)",
                         color: "var(--text-primary)",
-                        boxShadow: "var(--shadow-md)",
                       }}
                     >
                       {skill.name}

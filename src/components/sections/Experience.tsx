@@ -27,7 +27,7 @@ const experiences: ExperienceItem[] = [
       "Learned about industrial machinery, safety procedures, and Production monitoring.",
       "Experienced company facilities and safety protocols including AC monitoring rooms and safety gear.",
     ],
-    technologies: ["Industrial Machinery", "Production Monitoring", "ST Mill", "Safety Protocols"],
+    technologies: [],
     certificateLink: "https://drive.google.com/file/d/1S9rAzCyww7UFoFsMqqVD7RpTtEXTcaue/view?usp=drive_link",
   },
   {
@@ -42,7 +42,7 @@ const experiences: ExperienceItem[] = [
       "Enhanced problem-solving skills through assigned tasks and programming challenges.",
       "Participated in code reviews and implemented feedback for code improvement.",
     ],
-    technologies: ["C++", "OOP", "Data Structures", "Memory Management", "Pointers"],
+    technologies: [],
     certificateLink: "https://drive.google.com/file/d/10KMOkdI3aw5MjmwQB-h-n4egNV5qHJLm/view?usp=drive_link",
   },
   {
@@ -58,7 +58,7 @@ const experiences: ExperienceItem[] = [
       "Certificate issued by DevTown in collaboration with Microsoft Student Chapter.",
       "Improved skills in basic web design and project implementation.",
     ],
-    technologies: ["HTML", "Web Design", "Web Development Fundamentals"],
+    technologies: [],
     certificateLink: "https://drive.google.com/file/d/1YlJ_HcVKMtKuVgatvFLLGMBmXUf6l8Cu/view?usp=drive_link",
   },
 ];
@@ -87,7 +87,7 @@ export default function Experience() {
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
         
         {/* Header - Natural flow, will never overlap */}
-        <div className="w-full flex justify-center pt-24 md:pt-32 px-6 shrink-0 z-10">
+        <div className="w-full flex justify-center px-6 shrink-0 z-10" style={{ paddingTop: "80px" }}>
           <div className="w-full max-w-7xl flex justify-center">
             <SectionHeading
               label="Experience"
@@ -105,7 +105,7 @@ export default function Experience() {
           >
 
           {experiences.map((exp, index) => (
-            <div key={index} className="w-[85vw] md:w-[500px] lg:w-[600px] xl:w-[700px] shrink-0 flex flex-col">
+            <div key={index} className="w-[80vw] md:w-[420px] lg:w-[500px] xl:w-[580px] h-[480px] sm:h-[430px] md:h-[400px] lg:h-[420px] xl:h-[440px] shrink-0 flex flex-col">
               <div className="flex-1 w-full h-full">
                 <ExperienceCard experience={exp} index={index} />
               </div>
@@ -147,7 +147,7 @@ function ExperienceCard({
         style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border)",
-          padding: "48px",
+          padding: "24px 28px",
         }}
         whileHover={{
           borderColor: "var(--accent)",
@@ -156,7 +156,7 @@ function ExperienceCard({
         }}
       >
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4 sm:min-h-[80px]">
           <div>
             <h3
               className="text-xl md:text-2xl font-bold mb-2"
@@ -183,7 +183,7 @@ function ExperienceCard({
             style={{
               background: "var(--accent-glow)",
               color: "#10b981",
-              padding: "10px 20px",
+              padding: "6px 12px",
             }}
           >
             <Calendar size={16} />
@@ -192,11 +192,11 @@ function ExperienceCard({
         </div>
 
         {/* Description */}
-        <ul className="space-y-4 mb-10 flex-grow">
+        <ul className="space-y-2 mb-4 flex-grow">
           {exp.description.map((desc, i) => (
             <li
               key={i}
-              className="flex items-start gap-3.5 text-[15px] md:text-base leading-loose"
+              className="flex items-start gap-3.5 text-[15px] md:text-base leading-relaxed"
               style={{ color: "var(--text-secondary)" }}
             >
               <span
@@ -208,7 +208,7 @@ function ExperienceCard({
           ))}
         </ul>
 
-        <div className="mt-auto space-y-10">
+        <div className="mt-auto space-y-4">
           {/* Tech tags */}
           <div className="flex flex-wrap gap-2">
             {exp.technologies.map((tech) => (
@@ -219,7 +219,7 @@ function ExperienceCard({
                   background: "var(--bg-secondary)",
                   color: "var(--text-primary)",
                   border: "1px solid var(--border)",
-                  padding: "10px 20px",
+                  padding: "6px 12px",
                 }}
               >
                 {tech}
@@ -229,7 +229,7 @@ function ExperienceCard({
 
           {/* Certificate Link */}
           {exp.certificateLink && (
-            <div style={{ marginTop: "12px", paddingTop: "12px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+            <div style={{ marginTop: "8px", paddingTop: "8px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
               <a
                 href={exp.certificateLink}
                 target="_blank"
@@ -240,7 +240,7 @@ function ExperienceCard({
                   color: "var(--text-primary)",
                   border: "1px solid var(--border)",
                   boxShadow: "var(--shadow-sm)",
-                  padding: "12px 24px",
+                  padding: "8px 16px",
                 }}
               >
                 <FileText size={16} style={{ color: "#10b981" }} />

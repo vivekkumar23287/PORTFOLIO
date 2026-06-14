@@ -29,24 +29,27 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
   );
 
   useEffect(() => {
-    setRandomPaths(
-      Array.from({ length: 10 }).map(() => ({
-        x: [
-          "0vw",
-          `${(Math.random() - 0.5) * 160}vw`,
-          `${(Math.random() - 0.5) * 160}vw`,
-          "0vw",
-        ],
-        y: [
-          "0vh",
-          `${(Math.random() - 0.5) * 120}vh`,
-          `${(Math.random() - 0.5) * 120}vh`,
-          "0vh",
-        ],
-        rotate: [0, Math.random() * 180, Math.random() * 360, 360],
-        duration: 25 + Math.random() * 20,
-      }))
-    );
+    const timer = setTimeout(() => {
+      setRandomPaths(
+        Array.from({ length: 10 }).map(() => ({
+          x: [
+            "0vw",
+            `${(Math.random() - 0.5) * 160}vw`,
+            `${(Math.random() - 0.5) * 160}vw`,
+            "0vw",
+          ],
+          y: [
+            "0vh",
+            `${(Math.random() - 0.5) * 120}vh`,
+            `${(Math.random() - 0.5) * 120}vh`,
+            "0vh",
+          ],
+          rotate: [0, Math.random() * 180, Math.random() * 360, 360],
+          duration: 25 + Math.random() * 20,
+        }))
+      );
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const cursorX = useMotionValue(0);

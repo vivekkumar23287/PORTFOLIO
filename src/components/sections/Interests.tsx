@@ -85,31 +85,44 @@ function InterestCard({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        delay: index * 0.07,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    },
+    hover: {
+      y: -6,
+      boxShadow: "var(--shadow-lg)",
+      borderColor: "var(--accent)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.07,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      className="group relative rounded-2xl text-center transition-all duration-300 cursor-default"
+      variants={cardVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      whileHover="hover"
+      className="group relative rounded-2xl text-center shadow-md cursor-pointer"
       style={{
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
         padding: "36px",
       }}
     >
-      <motion.div
-        whileHover={{
-          y: -6,
-          boxShadow: "var(--shadow-lg)",
-          borderColor: "var(--accent)",
-        }}
-        className="relative"
-      >
+      <div className="relative">
         {/* Icon */}
         <motion.div
           className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-4"
@@ -132,7 +145,7 @@ function InterestCard({
         >
           {interest.description}
         </p>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
