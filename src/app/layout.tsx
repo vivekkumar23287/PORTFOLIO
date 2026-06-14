@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/images/Vivek Kumar Logo.png",
+    icon: "/images/VIVEK KUMAR LOGO.png",
   },
 };
 
