@@ -22,9 +22,9 @@ import {
 import { VscVscode } from "react-icons/vsc";
 
 const ClerkIcon = ({ style }: { style?: React.CSSProperties }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     style={{ ...style, width: "1em", height: "1em" }}
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -76,7 +76,7 @@ export default function Skills() {
     <section
       id="skills"
       className="relative overflow-hidden"
-      style={{ 
+      style={{
         background: "var(--bg-secondary)",
         paddingTop: "80px",
         paddingBottom: "120px"
@@ -127,7 +127,7 @@ export default function Skills() {
         {/* Spacer to push technologies section down */}
         <div className="h-6 md:h-10" />
 
-        {/* Floating tech icons grid */}
+
         <Reveal delay={0.3}>
           <div>
             <h3
@@ -162,7 +162,7 @@ export default function Skills() {
                     <skill.icon
                       style={{ fontSize: 24, color: "var(--text-secondary)" }}
                     />
-                    {/* Tooltip */}
+
                     <div
                       className="absolute -top-10 left-1/2 -translate-x-1/2 text-[11px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
                       style={{

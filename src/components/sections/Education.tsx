@@ -55,7 +55,7 @@ export default function Education() {
     <section
       id="education"
       className="relative overflow-hidden"
-      style={{ 
+      style={{
         background: "var(--bg-primary)",
         paddingTop: "80px",
         paddingBottom: "120px"
@@ -174,7 +174,7 @@ function EducationCard({
             >
               <div className="flex items-center gap-2 mb-2">
                 <Award size={14} style={{ color: "#10b981" }} />
-                <h4 
+                <h4
                   className="text-sm font-semibold uppercase tracking-wider"
                   style={{ color: "#10b981" }}
                 >
@@ -185,7 +185,7 @@ function EducationCard({
           )}
         </div>
 
-        {/* Highlights */}
+
         <div className="mt-4 ml-16 space-y-1.5">
           {edu.highlights.map((highlight, i) => (
             <div

@@ -65,7 +65,7 @@ const experiences: ExperienceItem[] = [
 
 export default function Experience() {
   const targetRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"]
@@ -73,8 +73,8 @@ export default function Experience() {
 
   const xPercent = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const xVw = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  
-  // This calc smoothly translates the content so the last item ends up perfectly on the right side
+
+
   const transform = useMotionTemplate`translateX(calc(${xPercent}% + ${xVw}vw))`;
 
   return (
@@ -85,8 +85,8 @@ export default function Experience() {
       style={{ background: "var(--bg-primary)" }}
     >
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
-        
-        {/* Header - Natural flow, will never overlap */}
+
+
         <div className="w-full flex justify-center px-6 shrink-0 z-10" style={{ paddingTop: "80px" }}>
           <div className="w-full max-w-7xl flex justify-center">
             <SectionHeading
@@ -96,11 +96,11 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* Track Container - Centers exactly in the remaining space below the header */}
+
         <div className="flex-1 flex flex-col justify-center min-h-0 w-full">
-          {/* Scrolling Track */}
-          <motion.div 
-            style={{ transform }} 
+
+          <motion.div
+            style={{ transform }}
             className="experience-track flex items-stretch gap-8 md:gap-16 pr-6 md:pr-[10vw] relative w-max"
           >
 
@@ -126,7 +126,7 @@ function ExperienceCard({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  // We remove once: true for horizontal scroll so it can trigger if they scroll back
+
   const isInView = useInView(ref, { margin: "-80px" });
 
   return (
@@ -141,7 +141,7 @@ function ExperienceCard({
       className="relative h-full flex flex-col"
     >
 
-      {/* Card */}
+
       <motion.div
         className="relative flex flex-col rounded-3xl transition-all duration-300 group h-full flex-grow overflow-hidden"
         style={{
@@ -155,7 +155,7 @@ function ExperienceCard({
           boxShadow: "var(--shadow-lg)",
         }}
       >
-        {/* Header */}
+
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4 sm:min-h-[80px]">
           <div>
             <h3
@@ -191,7 +191,7 @@ function ExperienceCard({
           </span>
         </div>
 
-        {/* Description */}
+
         <ul className="space-y-2 mb-4 flex-grow">
           {exp.description.map((desc, i) => (
             <li
@@ -209,7 +209,7 @@ function ExperienceCard({
         </ul>
 
         <div className="mt-auto space-y-4">
-          {/* Tech tags */}
+
           <div className="flex flex-wrap gap-2">
             {exp.technologies.map((tech) => (
               <span
@@ -227,7 +227,7 @@ function ExperienceCard({
             ))}
           </div>
 
-          {/* Certificate Link */}
+
           {exp.certificateLink && (
             <div style={{ marginTop: "8px", paddingTop: "8px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
               <a
@@ -245,9 +245,9 @@ function ExperienceCard({
               >
                 <FileText size={16} style={{ color: "#10b981" }} />
                 <span>View Certificate</span>
-                <ExternalLink 
-                  size={14} 
-                  className="opacity-50 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" 
+                <ExternalLink
+                  size={14}
+                  className="opacity-50 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all"
                 />
               </a>
             </div>

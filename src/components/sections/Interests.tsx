@@ -53,7 +53,7 @@ export default function Interests() {
     <section
       id="interests"
       className="relative overflow-hidden"
-      style={{ 
+      style={{
         background: "var(--bg-primary)",
         paddingTop: "80px",
         paddingBottom: "120px"

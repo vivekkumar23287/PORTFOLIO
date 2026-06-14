@@ -20,13 +20,13 @@ export default function About() {
     <section
       id="about"
       className="relative overflow-hidden"
-      style={{ 
+      style={{
         background: "var(--bg-secondary)",
         paddingTop: "30px",
         paddingBottom: "120px"
       }}
     >
-      {/* Subtle gradient */}
+
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-30 blur-[120px]"
         style={{ background: "var(--accent-glow)" }}
@@ -39,15 +39,15 @@ export default function About() {
         />
 
         <div ref={ref} className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          {/* Left — Image / Visual */}
+
           <Reveal direction="left">
             <div className="relative group perspective-1000">
-              {/* Glowing aura behind the image */}
-              <div 
+
+              <div
                 className="absolute -inset-4 rounded-[2rem] opacity-20 group-hover:opacity-40 transition-opacity duration-700 blur-2xl"
                 style={{ background: "var(--accent)" }}
               />
-              
+
               <motion.div
                 className="relative w-full aspect-[4/5] max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl"
                 style={{
@@ -55,16 +55,16 @@ export default function About() {
                   border: "1px solid var(--border)",
                 }}
               >
-                {/* Your Custom Image */}
-                <div 
-                  className="absolute inset-0 bg-contain bg-bottom bg-no-repeat" 
+
+                <div
+                  className="absolute inset-0 bg-contain bg-bottom bg-no-repeat"
                   style={{ backgroundImage: "url('/images/USER IMAGE 2.png')" }}
                 />
-                
-                {/* Subtle gradient overlay */}
+
+
                 <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/40 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-500" />
 
-                {/* Premium Code Overlay inside the image */}
+
               </motion.div>
             </div>
           </Reveal>
@@ -116,7 +116,7 @@ export default function About() {
               </p>
             </Reveal>
 
-            {/* Badges */}
+
             <div className="flex flex-wrap gap-5 mt-6">
               {badges.map((badge, i) => (
                 <Reveal key={badge.label} delay={0.35 + i * 0.1}>
@@ -137,14 +137,14 @@ export default function About() {
                     }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   >
-                    <div 
-                      className="flex items-center justify-center p-3 rounded-full transition-colors duration-500 shadow-sm shrink-0" 
+                    <div
+                      className="flex items-center justify-center p-3 rounded-full transition-colors duration-500 shadow-sm shrink-0"
                       style={{ background: "var(--accent-glow)" }}
                     >
-                      <badge.icon 
-                        size={20} 
-                        className="transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" 
-                        style={{ color: "#10b981" }} 
+                      <badge.icon
+                        size={20}
+                        className="transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12"
+                        style={{ color: "#10b981" }}
                       />
                     </div>
                     <span className="whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>

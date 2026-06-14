@@ -81,13 +81,13 @@ export default function Contact() {
     <section
       id="contact"
       className="relative overflow-hidden"
-      style={{ 
+      style={{
         background: "var(--bg-secondary)",
         paddingTop: "80px",
         paddingBottom: "120px"
       }}
     >
-      {/* Background gradient */}
+
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-20 blur-[120px]"
         style={{ background: "var(--accent)" }}
@@ -100,7 +100,7 @@ export default function Contact() {
         />
 
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 max-w-4xl mx-auto">
-          {/* Left — Info */}
+
           <div>
             <Reveal>
               <div>
@@ -110,7 +110,7 @@ export default function Contact() {
                 >
                   Get in Touch
                 </h3>
-                
+
                 <div className="h-6" />
 
                 <p
@@ -178,7 +178,7 @@ export default function Contact() {
                       <social.icon
                         style={{ fontSize: 18, color: "var(--text-secondary)" }}
                       />
-                      {/* Tooltip */}
+
                       <div
                         className="absolute -top-9 left-1/2 -translate-x-1/2 text-[10px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
                         style={{
@@ -194,7 +194,7 @@ export default function Contact() {
             </Reveal>
           </div>
 
-          {/* Right — Form */}
+
           <Reveal delay={0.1}>
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
@@ -263,7 +263,7 @@ export default function Contact() {
                 type="submit"
                 disabled={isSending}
                 className="w-full flex items-center justify-center gap-3 px-10 rounded-2xl text-white font-bold text-lg tracking-widest disabled:opacity-60 shadow-xl"
-                style={{ 
+                style={{
                   background: "var(--gradient-accent)",
                   paddingTop: "18px",
                   paddingBottom: "18px"

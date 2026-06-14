@@ -19,7 +19,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
   const [roleIndex, setRoleIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const [randomPaths, setRandomPaths] = useState(() => 
+  const [randomPaths, setRandomPaths] = useState(() =>
     Array.from({ length: 10 }).map(() => ({
       x: ["0vw", "0vw", "0vw", "0vw"],
       y: ["0vh", "0vh", "0vh", "0vh"],
@@ -57,7 +57,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
   const springX = useSpring(cursorX, { stiffness: 50, damping: 20 });
   const springY = useSpring(cursorY, { stiffness: 50, damping: 20 });
 
-  // Mouse tracking
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -70,7 +70,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [cursorX, cursorY]);
 
-  // GSAP intro animation
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -146,7 +146,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
     return () => ctx.revert();
   }, []);
 
-  // Role rotation
+
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
@@ -167,7 +167,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ background: "var(--bg-primary)" }}
     >
-      {/* Interactive gradient background */}
+
       <div
         className="absolute inset-0 transition-transform duration-[2000ms] ease-out"
         style={{
@@ -179,7 +179,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         }}
       />
 
-      {/* Grid pattern */}
+
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -191,7 +191,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         }}
       />
 
-      {/* Floating elements (Random Procedural Paths) */}
+
       <motion.div
         className="hero-floating-element absolute top-[10%] left-[10%] w-20 h-20 rounded-2xl opacity-20"
         style={{ background: "var(--gradient-accent)" }}
@@ -250,7 +250,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         transition={{ duration: randomPaths[5].duration, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* New Element: Hollow Wireframe Triangle */}
+
       <motion.div
         className="hero-floating-element absolute top-[30%] left-[35%] opacity-15"
         style={{ color: "#10b981" }}
@@ -266,13 +266,13 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         </svg>
       </motion.div>
 
-      {/* New Element: Frosted Glass Pill */}
+
       <motion.div
         className="hero-floating-element absolute top-[45%] right-[25%] w-24 h-8 rounded-full shadow-2xl"
-        style={{ 
-          background: "var(--glass-bg)", 
-          border: "1px solid var(--border)", 
-          backdropFilter: "blur(16px)" 
+        style={{
+          background: "var(--glass-bg)",
+          border: "1px solid var(--border)",
+          backdropFilter: "blur(16px)"
         }}
         animate={{
           x: randomPaths[7].x,
@@ -282,10 +282,10 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         transition={{ duration: randomPaths[7].duration, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* New Element: Massive Soft Orb 1 */}
+
       <motion.div
         className="hero-floating-element absolute top-[20%] left-[20%] w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{ 
+        style={{
           background: "var(--accent)",
           opacity: 0.05,
           filter: "blur(100px)",
@@ -297,10 +297,10 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         transition={{ duration: randomPaths[8].duration * 1.5, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* New Element: Massive Soft Orb 2 */}
+
       <motion.div
         className="hero-floating-element absolute bottom-[10%] right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ 
+        style={{
           background: "var(--gradient-accent)",
           opacity: 0.04,
           filter: "blur(120px)",
@@ -312,9 +312,9 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         transition={{ duration: randomPaths[9].duration * 1.5, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Main content */}
+
       <div className="section-container relative z-10 text-center">
-        {/* Greeting */}
+
         <motion.div className="hero-greeting flex items-center justify-center gap-2 mb-6">
           <Sparkles size={16} style={{ color: "#10b981" }} />
           <span
@@ -362,7 +362,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
           </AnimatePresence>
         </div>
 
-        {/* Description */}
+
         <div className="w-full flex justify-center mb-12">
           <p
             className="hero-description max-w-xl text-center text-base md:text-lg leading-relaxed"
@@ -374,19 +374,19 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6" style={{ marginTop: "48px" }}>
-          {/* Primary Button: Animated Rotating Border */}
+
           <motion.button
             onClick={onHireMe}
             className="hero-cta group relative inline-flex overflow-hidden rounded-full p-[2px] w-full sm:w-[180px] h-[52px] shadow-2xl"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
           >
-            <span 
-              className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite]" 
-              style={{ background: "conic-gradient(from 90deg at 50% 50%, var(--bg-primary) 0%, #10b981 50%, var(--bg-primary) 100%)" }} 
+            <span
+              className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite]"
+              style={{ background: "conic-gradient(from 90deg at 50% 50%, var(--bg-primary) 0%, #10b981 50%, var(--bg-primary) 100%)" }}
             />
-            <span 
-              className="inline-flex h-full w-full items-center justify-center rounded-full text-[13px] font-bold uppercase tracking-widest gap-2.5 transition-colors duration-300 relative z-10" 
+            <span
+              className="inline-flex h-full w-full items-center justify-center rounded-full text-[13px] font-bold uppercase tracking-widest gap-2.5 transition-colors duration-300 relative z-10"
               style={{ background: "var(--bg-card)", color: "var(--text-primary)" }}
             >
               <Mail size={16} style={{ color: "#10b981" }} className="group-hover:scale-110 transition-transform duration-300" />
@@ -394,7 +394,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
             </span>
           </motion.button>
 
-          {/* Secondary Button: Premium Glass Sweep */}
+
           <motion.button
             onClick={scrollToProjects}
             className="hero-cta group relative inline-flex items-center justify-center overflow-hidden rounded-full w-full sm:w-[180px] h-[52px] shadow-xl"
@@ -406,12 +406,12 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
           >
-            <span 
-              className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" 
-              style={{ background: "var(--gradient-accent)" }} 
+            <span
+              className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"
+              style={{ background: "var(--gradient-accent)" }}
             />
-            <span 
-              className="relative z-10 flex items-center justify-center gap-2.5 text-[13px] font-bold uppercase tracking-widest group-hover:text-white transition-colors duration-300" 
+            <span
+              className="relative z-10 flex items-center justify-center gap-2.5 text-[13px] font-bold uppercase tracking-widest group-hover:text-white transition-colors duration-300"
               style={{ color: "var(--text-primary)" }}
             >
               View Projects
@@ -421,7 +421,7 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         </div>
       </div>
 
-      {/* Scroll indicator (Ultra-Premium Drop Line) */}
+
       <div className="hero-scroll-indicator absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
         <span
           className="text-[9px] font-medium tracking-[0.4em] uppercase mb-4 opacity-50 hover:opacity-100 transition-opacity duration-300"
@@ -429,16 +429,16 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
         >
           Scroll
         </span>
-        
+
         {/* The Track */}
-        <div 
+        <div
           className="relative w-[1px] h-[24px] overflow-hidden"
           style={{ background: "var(--border-hover)" }}
         >
           {/* The dropping line */}
           <motion.div
             className="absolute top-0 w-full h-[80%]"
-            style={{ 
+            style={{
               background: "linear-gradient(to bottom, transparent, var(--accent), transparent)",
             }}
             animate={{ y: ["-100%", "200%"] }}

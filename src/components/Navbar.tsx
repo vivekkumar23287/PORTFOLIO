@@ -27,11 +27,11 @@ export default function Navbar() {
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
     setIsScrolled(currentScrollY > 50);
-    // Vanish the navbar smoothly when scrolling past the home section (approx window height)
+
     setIsVisible(currentScrollY < window.innerHeight - 100);
     setLastScrollY(currentScrollY);
 
-    // Detect active section
+
     const sections = navLinks.map((l) => l.href.slice(1));
     for (let i = sections.length - 1; i >= 0; i--) {
       const el = document.getElementById(sections[i]);
@@ -72,7 +72,7 @@ export default function Navbar() {
         }`}
       >
         <div className="w-full px-6 md:px-12 lg:px-20 flex items-center justify-between"  style={{ maxWidth: "1400px", margin: "0 auto" }}>
-          {/* Logo */}
+
           <motion.a
             href="#home"
             onClick={(e) => { e.preventDefault(); scrollTo("#home"); }}
@@ -83,7 +83,7 @@ export default function Navbar() {
             <span className="gradient-text">Vivek.</span>
           </motion.a>
 
-          {/* Desktop Nav */}
+
           <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((link) => (
               <motion.button
@@ -104,9 +104,9 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right side */}
+
           <div className="flex items-center gap-3">
-            {/* Theme toggle */}
+
             <motion.button
               onClick={toggleTheme}
               className="relative w-10 h-10 rounded-full flex items-center justify-center"
@@ -165,7 +165,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Overlay */}
+
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div

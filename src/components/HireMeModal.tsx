@@ -18,7 +18,7 @@ const contactOptions = [
     hoverBg: "rgba(234, 67, 53, 0.05)",
     borderGlow: "rgba(234, 67, 53, 0.3)",
     action: () => {
-      // Opens Gmail compose window in a new tab, pre-filling the "To" address
+
       window.open(
         "https://mail.google.com/mail/?view=cm&fs=1&to=vk5400310@gmail.com",
         "_blank"
@@ -61,7 +61,7 @@ export default function HireMeModal({ isOpen, onClose }: HireMeModalProps) {
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
           onClick={onClose}
         >
-          {/* Backdrop with heavy blur */}
+
           <motion.div
             className="absolute inset-0"
             style={{
@@ -70,7 +70,7 @@ export default function HireMeModal({ isOpen, onClose }: HireMeModalProps) {
             }}
           />
 
-          {/* Modal Container */}
+
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export default function HireMeModal({ isOpen, onClose }: HireMeModalProps) {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Elegant glowing top highlight */}
+
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px]"
               style={{
@@ -98,7 +98,7 @@ export default function HireMeModal({ isOpen, onClose }: HireMeModalProps) {
               }}
             />
 
-            {/* Close button */}
+
             <motion.button
               onClick={onClose}
               className="absolute w-8 h-8 rounded-full flex items-center justify-center z-20 group"
@@ -136,7 +136,7 @@ export default function HireMeModal({ isOpen, onClose }: HireMeModalProps) {
               </motion.p>
             </div>
 
-            {/* Options List */}
+
             <div style={{ padding: "0 40px 40px 40px" }} className="space-y-4">
               {contactOptions.map((option, i) => (
                 <motion.button
@@ -154,19 +154,19 @@ export default function HireMeModal({ isOpen, onClose }: HireMeModalProps) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {/* Hover background color tint */}
-                  <div 
+
+                  <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{ background: option.hoverBg }}
                   />
-                  
-                  {/* Hover border glow */}
-                  <div 
+
+
+                  <div
                     className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{ border: `1px solid ${option.borderGlow}` }}
                   />
 
-                  {/* Sleek Minimalist Icon Container */}
+
                   <div
                     className="relative w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110"
                     style={{
@@ -174,26 +174,26 @@ export default function HireMeModal({ isOpen, onClose }: HireMeModalProps) {
                       border: "1px solid var(--border)",
                     }}
                   >
-                    <option.icon 
-                      size={20} 
+                    <option.icon
+                      size={20}
                       className="transition-colors duration-300"
                       style={{ color: "var(--text-secondary)" }}
                     />
-                    {/* Glowing colored icon overlay that fades in on hover */}
+
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <option.icon size={20} style={{ color: option.color }} />
                     </div>
                   </div>
 
-                  {/* Text Content */}
+
                   <div className="relative z-10">
-                    <div 
+                    <div
                       className="font-semibold text-[15px] tracking-wide mb-1"
                       style={{ color: "var(--text-primary)" }}
                     >
                       {option.label}
                     </div>
-                    <div 
+                    <div
                       className="text-[13px] font-medium tracking-wide"
                       style={{ color: "var(--text-muted)" }}
                     >

@@ -55,10 +55,10 @@ const projects: Project[] = [
     emoji: "🚀",
     useBeam: true,
     screenshots: [
-      "/images/SMART IMAGE 1.png", // Left (1)
-      "/images/SMART IMAGE 2.png", // Middle (2)
-      "/images/SMART IMAGE 3.png", // Right (3)
-      "/images/SMART IMAGE 4.png", // Default (4)
+      "/images/SMART IMAGE 1.png",
+      "/images/SMART IMAGE 2.png",
+      "/images/SMART IMAGE 3.png",
+      "/images/SMART IMAGE 4.png",
     ],
   },
   {
@@ -86,13 +86,13 @@ export default function Projects() {
     <section
       id="projects"
       className="relative overflow-hidden"
-      style={{ 
+      style={{
         background: "var(--bg-secondary)",
         paddingTop: "80px",
         paddingBottom: "120px"
       }}
     >
-      {/* Background glow */}
+
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 blur-[150px] pointer-events-none"
         style={{ background: "var(--accent)" }}
@@ -104,7 +104,7 @@ export default function Projects() {
           title="Things I've Built"
         />
 
-        {/* Unified Project List */}
+
         <div className="flex flex-col items-center gap-12 mt-12 w-full">
           {projects.map((project, index) => (
             <div key={index} className="w-[85vw] md:w-[420px] lg:w-[480px] xl:w-[500px] flex flex-col">
@@ -120,45 +120,45 @@ export default function Projects() {
 function FeaturedProjectCard({ project, index }: { project: Project, index?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  
-  // Custom scroll animation tracking the entire time the card is on screen
-  // start end = Top of card hits bottom of screen (0 progress)
-  // end start = Bottom of card hits top of screen (1 progress)
+
+
+
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
 
-  // Add buttery smooth spring physics to the scroll progress
-  // This causes the animation to gracefully lag behind the user's scroll and coast to a stop
+
+
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 70,
     damping: 20,
     restDelta: 0.001
   });
 
-  // Determine slide direction based on index.
-  // 1st Card (index 0): back card goes left (-55%)
-  // 2nd Card (index 1): back card goes right (55%)
-  // 3rd Card (index 2): back card goes left (-55%)
+
+
+
+
   const isEven = index !== undefined && index % 2 === 0;
   const backCardTarget = isEven ? "-55%" : "55%";
   const frontCardTarget = isEven ? "55%" : "-55%";
 
-  // At 25% of journey: start sliding out
-  // At 40% of journey: completely out
-  // At 40% -> 60% of journey: stay completely out (while in center of screen)
-  // At 60% of journey: start sliding back in
-  // At 75% of journey: completely hidden again (0%)
+
+
+
+
+
   const backCardX = useTransform(
-    smoothProgress, 
-    [0, 0.25, 0.4, 0.6, 0.75, 1], 
+    smoothProgress,
+    [0, 0.25, 0.4, 0.6, 0.75, 1],
     ["0%", "0%", backCardTarget, backCardTarget, "0%", "0%"]
   );
 
   const frontCardX = useTransform(
-    smoothProgress, 
-    [0, 0.25, 0.4, 0.6, 0.75, 1], 
+    smoothProgress,
+    [0, 0.25, 0.4, 0.6, 0.75, 1],
     project.screenshots ? ["0%", "0%", frontCardTarget, frontCardTarget, "0%", "0%"] : ["0%", "0%", "0%", "0%", "0%", "0%"]
   );
 
@@ -175,8 +175,8 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
 
   return (
     <div className="relative w-full h-full" ref={ref}>
-      
-      {/* The Screenshot Card (Back Card) */}
+
+
       {project.screenshots && (
         <motion.div
           className="absolute left-0 right-0 top-1/2 w-full rounded-3xl z-0 overflow-hidden shadow-2xl"
@@ -219,7 +219,7 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
       />
 
       <div className="relative z-10 flex flex-col gap-2 items-start h-full flex-grow">
-        {/* Preview */}
+
         {project.useBeam ? (
           <div className="w-full shrink-0">
             {project.title === "Smart Career Automation System" ? (
@@ -292,7 +292,7 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
                 target="_blank"
                 rel="noopener"
                 className="flex items-center justify-center gap-2 rounded-full text-sm font-semibold text-white w-full sm:w-auto"
-                style={{ 
+                style={{
                   background: "var(--gradient-accent)",
                   padding: "10px 24px"
                 }}
@@ -308,7 +308,7 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
                 target="_blank"
                 rel="noopener"
                 className="flex items-center justify-center gap-2 rounded-full text-sm font-semibold text-white w-full sm:w-auto"
-                style={{ 
+                style={{
                   background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
                   padding: "10px 24px"
                 }}
@@ -344,11 +344,11 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
 }
 
 function ScreenshotGallery({ images }: { images: string[] }) {
-  // 3 = Default image (no hover)
+
   const [activeImg, setActiveImg] = useState(3);
 
   return (
-    <div 
+    <div
       className="relative w-full h-full"
       style={{ background: "#0a0a0a" }}
       onMouseLeave={() => setActiveImg(3)}
@@ -362,12 +362,12 @@ function ScreenshotGallery({ images }: { images: string[] }) {
           style={{ opacity: activeImg === idx ? 1 : 0 }}
         />
       ))}
-      
-      {/* Premium instruction badge (fades out on hover) */}
-      <div 
+
+
+      <div
         className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full z-20 pointer-events-none transition-all duration-500 flex items-center gap-2.5 shadow-2xl"
-        style={{ 
-          background: "rgba(10, 10, 10, 0.75)", 
+        style={{
+          background: "rgba(10, 10, 10, 0.75)",
           backdropFilter: "blur(12px)",
           border: "1px solid rgba(255,255,255,0.1)",
           opacity: activeImg === 3 ? 1 : 0,
@@ -378,19 +378,19 @@ function ScreenshotGallery({ images }: { images: string[] }) {
         <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-white/90">Hover to Explore Gallery</span>
       </div>
 
-      {/* 3 Invisible Hover Zones with subtle dividers */}
+
       <div className="absolute inset-0 flex z-10">
-        <div 
-          className="flex-1 h-full cursor-crosshair border-r border-black/40" 
-          onMouseEnter={() => setActiveImg(0)} 
+        <div
+          className="flex-1 h-full cursor-crosshair border-r border-black/40"
+          onMouseEnter={() => setActiveImg(0)}
         />
-        <div 
-          className="flex-1 h-full cursor-crosshair border-r border-black/40" 
-          onMouseEnter={() => setActiveImg(1)} 
+        <div
+          className="flex-1 h-full cursor-crosshair border-r border-black/40"
+          onMouseEnter={() => setActiveImg(1)}
         />
-        <div 
-          className="flex-1 h-full cursor-crosshair" 
-          onMouseEnter={() => setActiveImg(2)} 
+        <div
+          className="flex-1 h-full cursor-crosshair"
+          onMouseEnter={() => setActiveImg(2)}
         />
       </div>
     </div>
