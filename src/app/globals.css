@@ -403,8 +403,14 @@ body {
 }
 
 .experience-track {
-  padding-left: calc(50vw - 40vw);
-  padding-right: calc(50vw - 40vw);
+  padding-left: calc(50vw - 42.5vw);
+  padding-right: calc(50vw - 42.5vw);
+}
+@media (min-width: 640px) {
+  .experience-track {
+    padding-left: calc(50vw - 40vw);
+    padding-right: calc(50vw - 40vw);
+  }
 }
 @media (min-width: 768px) {
   .experience-track {
@@ -423,6 +429,31 @@ body {
     padding-left: calc(50vw - 290px);
     padding-right: calc(50vw - 290px);
   }
+}
+
+.exp-card-hover {
+  will-change: transform, box-shadow;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.22s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.28s cubic-bezier(0.2, 0, 0, 1),
+    border-color 0.28s ease;
+}
+
+.exp-card-hover:hover {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow:
+    0 12px 28px -4px rgba(0, 0, 0, 0.1),
+    0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.dark .exp-card-hover:hover {
+  box-shadow:
+    0 12px 28px -4px rgba(0, 0, 0, 0.35),
+    0 4px 10px -2px rgba(0, 0, 0, 0.2);
+  border-color: rgba(52, 211, 153, 0.4);
 }
 
 @theme inline {

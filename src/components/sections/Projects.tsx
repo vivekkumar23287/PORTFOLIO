@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import { SectionHeading } from "../ui/SectionHeading";
 import { ExternalLink, Star, MousePointer2 } from "lucide-react";
@@ -88,8 +88,8 @@ export default function Projects() {
       className="relative overflow-hidden"
       style={{
         background: "var(--bg-secondary)",
-        paddingTop: "80px",
-        paddingBottom: "120px"
+        paddingTop: "60px",
+        paddingBottom: "80px"
       }}
     >
 
@@ -105,9 +105,9 @@ export default function Projects() {
         />
 
 
-        <div className="flex flex-col items-center gap-12 mt-12 w-full">
+        <div className="flex flex-col items-center gap-8 sm:gap-12 mt-8 sm:mt-12 w-full">
           {projects.map((project, index) => (
-            <div key={index} className="w-[85vw] md:w-[420px] lg:w-[480px] xl:w-[500px] flex flex-col">
+            <div key={index} className="w-[92vw] sm:w-[85vw] md:w-[420px] lg:w-[480px] xl:w-[500px] flex flex-col">
               <FeaturedProjectCard project={project} index={index} />
             </div>
           ))}
@@ -119,7 +119,16 @@ export default function Projects() {
 
 function FeaturedProjectCard({ project, index }: { project: Project, index?: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
 
 
@@ -145,6 +154,9 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
   const backCardTarget = isEven ? "-55%" : "55%";
   const frontCardTarget = isEven ? "55%" : "-55%";
 
+  // Disable split animation on mobile
+  const mobileZero = "0%";
+
 
 
 
@@ -153,13 +165,17 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
   const backCardX = useTransform(
     smoothProgress,
     [0, 0.25, 0.4, 0.6, 0.75, 1],
-    ["0%", "0%", backCardTarget, backCardTarget, "0%", "0%"]
+    isMobile
+      ? [mobileZero, mobileZero, mobileZero, mobileZero, mobileZero, mobileZero]
+      : ["0%", "0%", backCardTarget, backCardTarget, "0%", "0%"]
   );
 
   const frontCardX = useTransform(
     smoothProgress,
     [0, 0.25, 0.4, 0.6, 0.75, 1],
-    project.screenshots ? ["0%", "0%", frontCardTarget, frontCardTarget, "0%", "0%"] : ["0%", "0%", "0%", "0%", "0%", "0%"]
+    isMobile
+      ? [mobileZero, mobileZero, mobileZero, mobileZero, mobileZero, mobileZero]
+      : project.screenshots ? ["0%", "0%", frontCardTarget, frontCardTarget, "0%", "0%"] : ["0%", "0%", "0%", "0%", "0%", "0%"]
   );
 
   const mouseX = useMotionValue(0);
@@ -177,7 +193,7 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
     <div className="relative w-full h-full" ref={ref}>
 
 
-      {project.screenshots && (
+      {project.screenshots && !isMobile && (
         <motion.div
           className="absolute left-0 right-0 top-1/2 w-full rounded-3xl z-0 overflow-hidden shadow-2xl"
           style={{
@@ -204,7 +220,7 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
           x: frontCardX,
           background: "var(--bg-card)",
           border: "1px solid var(--border)",
-          padding: "12px 36px 36px 36px",
+          padding: isMobile ? "12px 16px 24px 16px" : "12px 36px 36px 36px",
         }}
       >
       {/* Mouse-follow light effect */}
@@ -230,11 +246,11 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
           </div>
         ) : (
           <div
-            className="w-full h-[240px] rounded-2xl flex items-center justify-center shrink-0 overflow-hidden relative"
+            className="w-full h-[180px] sm:h-[240px] rounded-2xl flex items-center justify-center shrink-0 overflow-hidden relative"
             style={{ background: project.gradient }}
           >
             {project.logo ? (
-              <div className="z-10 flex size-36 items-center justify-center rounded-full border border-gray-100 bg-white p-2 shadow-lg overflow-hidden">
+              <div className="z-10 flex size-24 sm:size-36 items-center justify-center rounded-full border border-gray-100 bg-white p-2 shadow-lg overflow-hidden">
                 <img
                   src={project.logo}
                   alt={`${project.title} Logo`}
@@ -255,19 +271,19 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
             </span>
           </div>
           <h3
-            className="text-2xl md:text-3xl font-bold mb-3"
+            className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3"
             style={{ color: "var(--text-primary)" }}
           >
             {project.title}
           </h3>
           <p
-            className="text-base leading-relaxed mb-6"
+            className="text-sm sm:text-base leading-relaxed mb-4 sm:mb-6"
             style={{ color: "var(--text-secondary)" }}
           >
             {project.description}
           </p>
 
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
             {project.technologies.map((tech) => (
               <span
                 key={tech}
@@ -283,9 +299,9 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
             ))}
           </div>
 
-          <div className="h-6" />
+          <div className="h-3 sm:h-6" />
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {project.liveUrl && (
               <motion.a
                 href={project.liveUrl}

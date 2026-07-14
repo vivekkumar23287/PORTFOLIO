@@ -37,21 +37,19 @@ const experiences: ExperienceItem[] = [
     period: "AUGUST 2024 – SEPTEMBER 2024",
     description: [
       "Completed a 4-week structured internship in C++ Programming.",
-      "Gained hands-on experience in writing efficient, object-oriented C++ code.",
+      "Gained experience in writing efficient, object-oriented C++ code.",
       "Understood core programming concepts such as data structures, memory management, and pointers.",
       "Enhanced problem-solving skills through assigned tasks and programming challenges.",
-      "Participated in code reviews and implemented feedback for code improvement.",
     ],
     technologies: [],
     certificateLink: "https://drive.google.com/file/d/10KMOkdI3aw5MjmwQB-h-n4egNV5qHJLm/view?usp=drive_link",
   },
   {
-    role: "Web Development Bootcamp",
+    role: "Web Development",
     company: "Dev Town",
     location: "ONLINE",
     period: "JULY 2025 - AUGUST 2025",
     description: [
-      "Completed the 'Netflix Clone Using HTML' bootcamp hosted by DevTown.",
       "Participated in a bootcamp focused on web development fundamentals.",
       "Built a static Netflix homepage clone using HTML only.",
       "Gained hands-on experience in designing and organizing content.",
@@ -81,37 +79,38 @@ export default function Experience() {
     <section
       id="experience"
       ref={targetRef}
-      className="relative h-[300vh]"
+      className="relative h-[300vh] md:h-[300vh]"
       style={{ background: "var(--bg-primary)" }}
     >
-      <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col overflow-hidden pb-8 md:pb-12">
 
 
-        <div className="w-full flex justify-center px-6 shrink-0 z-10" style={{ paddingTop: "80px" }}>
+        <div className="w-full flex justify-center px-6 shrink-0 z-10" style={{ paddingTop: "20px" }}>
           <div className="w-full max-w-7xl flex justify-center">
             <SectionHeading
               label="Experience"
               title="Where I've Worked"
+              className="!mb-4"
             />
           </div>
         </div>
 
 
-        <div className="flex-1 flex flex-col justify-center min-h-0 w-full">
+        <div className="flex-1 flex flex-col justify-start min-h-0 w-full -mt-4 sm:-mt-8 md:-mt-20">
 
           <motion.div
             style={{ transform }}
-            className="experience-track flex items-stretch gap-8 md:gap-16 pr-6 md:pr-[10vw] relative w-max"
+            className="experience-track flex items-stretch gap-4 sm:gap-8 md:gap-16 pr-4 sm:pr-6 md:pr-[10vw] relative w-max"
           >
 
-          {experiences.map((exp, index) => (
-            <div key={index} className="w-[80vw] md:w-[420px] lg:w-[500px] xl:w-[580px] h-[480px] sm:h-[430px] md:h-[400px] lg:h-[420px] xl:h-[440px] shrink-0 flex flex-col">
-              <div className="flex-1 w-full h-full">
-                <ExperienceCard experience={exp} index={index} />
+            {experiences.map((exp, index) => (
+              <div key={index} className="w-[85vw] sm:w-[80vw] md:w-[420px] lg:w-[500px] xl:w-[580px] h-auto min-h-[320px] sm:min-h-[340px] md:min-h-[340px] lg:min-h-[350px] xl:min-h-[360px] shrink-0 flex flex-col">
+                <div className="flex-1 w-full h-full">
+                  <ExperienceCard experience={exp} index={index} />
+                </div>
               </div>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
@@ -142,29 +141,24 @@ function ExperienceCard({
     >
 
 
-      <motion.div
-        className="relative flex flex-col rounded-3xl transition-all duration-300 group h-full flex-grow overflow-hidden"
+      <div
+        className="relative flex flex-col rounded-3xl group h-full flex-grow overflow-hidden exp-card-hover"
         style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border)",
-          padding: "24px 28px",
-        }}
-        whileHover={{
-          borderColor: "var(--accent)",
-          y: -4,
-          boxShadow: "var(--shadow-lg)",
+          padding: "14px 14px",
         }}
       >
 
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4 sm:min-h-[80px]">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4 mb-3 sm:mb-4 sm:min-h-[80px] shrink-0">
           <div>
             <h3
-              className="text-xl md:text-2xl font-bold mb-2"
+              className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2"
               style={{ color: "var(--text-primary)" }}
             >
               {exp.role}
             </h3>
-            <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap sm:flex-nowrap">
               <span className="flex items-center gap-1.5 text-sm md:text-base font-medium gradient-text">
                 <Briefcase size={16} />
                 {exp.company}
@@ -192,44 +186,42 @@ function ExperienceCard({
         </div>
 
 
-        <ul className="space-y-2 mb-4 flex-grow">
+        <ul className="space-y-1 sm:space-y-1.5 mb-2 sm:mb-3 flex-grow list-none">
           {exp.description.map((desc, i) => (
             <li
               key={i}
-              className="flex items-start gap-3.5 text-[15px] md:text-base leading-relaxed"
+              className="text-[12px] sm:text-[14px] md:text-[15px] leading-snug sm:leading-normal"
               style={{ color: "var(--text-secondary)" }}
             >
-              <span
-                className="w-1.5 h-1.5 rounded-full mt-2.5 shrink-0"
-                style={{ background: "var(--accent)" }}
-              />
               {desc}
             </li>
           ))}
         </ul>
 
-        <div className="mt-auto space-y-4">
+        <div className="mt-auto space-y-3">
 
-          <div className="flex flex-wrap gap-2">
-            {exp.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full text-xs md:text-sm font-semibold tracking-wide shadow-sm"
-                style={{
-                  background: "var(--bg-secondary)",
-                  color: "var(--text-primary)",
-                  border: "1px solid var(--border)",
-                  padding: "6px 12px",
-                }}
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+          {exp.technologies.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {exp.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full text-xs md:text-sm font-semibold tracking-wide shadow-sm"
+                  style={{
+                    background: "var(--bg-secondary)",
+                    color: "var(--text-primary)",
+                    border: "1px solid var(--border)",
+                    padding: "6px 12px",
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
 
 
           {exp.certificateLink && (
-            <div style={{ marginTop: "8px", paddingTop: "8px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+            <div style={{ marginTop: "6px", paddingTop: "6px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
               <a
                 href={exp.certificateLink}
                 target="_blank"
@@ -240,7 +232,7 @@ function ExperienceCard({
                   color: "var(--text-primary)",
                   border: "1px solid var(--border)",
                   boxShadow: "var(--shadow-sm)",
-                  padding: "8px 16px",
+                  padding: "6px 14px",
                 }}
               >
                 <FileText size={16} style={{ color: "#10b981" }} />
@@ -253,7 +245,7 @@ function ExperienceCard({
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

@@ -23,7 +23,7 @@ export default function About() {
       style={{
         background: "var(--bg-secondary)",
         paddingTop: "30px",
-        paddingBottom: "120px"
+        paddingBottom: "60px"
       }}
     >
 
@@ -38,7 +38,7 @@ export default function About() {
           title="A Glimpse Into Who I Am"
         />
 
-        <div ref={ref} className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div ref={ref} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
           <Reveal direction="left">
             <div className="relative group perspective-1000">
@@ -49,7 +49,7 @@ export default function About() {
               />
 
               <motion.div
-                className="relative w-full aspect-[4/5] max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl"
+                className="relative w-full aspect-[4/5] max-w-[280px] sm:max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
@@ -117,17 +117,17 @@ export default function About() {
             </Reveal>
 
 
-            <div className="flex flex-wrap gap-5 mt-6">
+            <div className="flex flex-wrap gap-3 sm:gap-5 mt-4 sm:mt-6">
               {badges.map((badge, i) => (
                 <Reveal key={badge.label} delay={0.35 + i * 0.1}>
                   <motion.div
-                    className="flex items-center gap-4 rounded-full text-base font-medium group cursor-pointer shrink-0"
+                    className="flex items-center gap-3 sm:gap-4 rounded-full text-sm sm:text-base font-medium group cursor-pointer shrink-0"
                     style={{
                       background: "var(--bg-card)",
                       border: "1px solid var(--border)",
                       color: "var(--text-primary)",
                       boxShadow: "var(--shadow-sm)",
-                      padding: "16px 40px",
+                      padding: "10px 20px",
                     }}
                     whileHover={{
                       scale: 1.03,

@@ -8,6 +8,8 @@ interface SectionHeadingProps {
   title: string;
   description?: string;
   align?: "left" | "center";
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export function SectionHeading({
@@ -15,6 +17,8 @@ export function SectionHeading({
   title,
   description,
   align = "center",
+  className = "",
+  style = {},
 }: SectionHeadingProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
@@ -22,7 +26,8 @@ export function SectionHeading({
   return (
     <div
       ref={ref}
-      className={`mb-16 md:mb-20 w-full flex flex-col ${align === "center" ? "items-center text-center" : "items-start text-left"}`}
+      className={`mb-16 md:mb-20 w-full flex flex-col ${align === "center" ? "items-center text-center" : "items-start text-left"} ${className}`}
+      style={style}
     >
       <motion.span
         initial={{ opacity: 0, y: 10 }}
