@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 import { Sun, Moon, Menu, X } from "lucide-react";
 
@@ -74,11 +75,18 @@ export default function Navbar() {
           <motion.a
             href="#home"
             onClick={(e) => { e.preventDefault(); scrollTo("#home"); }}
-            className="relative z-10 text-xl font-bold tracking-tight"
+            className="relative z-10"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="gradient-text">Vivek.</span>
+            <Image
+              src="/images/icon.png"
+              alt="Vivek Kumar Logo"
+              width={40}
+              height={40}
+              className="rounded-lg"
+              priority
+            />
           </motion.a>
 
 
