@@ -1,8 +1,22 @@
 "use client";
 
 import React, { forwardRef, useRef } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
+
+interface ProjectBeamProps {
+  leftImg: string;
+  leftAlt: string;
+  leftScaleClass?: string;
+  leftPaddingClass?: string;
+  rightImg: string;
+  rightAlt: string;
+  rightScaleClass?: string;
+  rightPaddingClass?: string;
+  startColor: string;
+  stopColor: string;
+}
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -23,7 +37,18 @@ const Circle = forwardRef<
 
 Circle.displayName = "Circle";
 
-export default function NiftyLiveBeam() {
+export default function ProjectBeam({
+  leftImg,
+  leftAlt,
+  leftScaleClass,
+  leftPaddingClass,
+  rightImg,
+  rightAlt,
+  rightScaleClass,
+  rightPaddingClass,
+  startColor,
+  stopColor,
+}: ProjectBeamProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const div1Ref = useRef<HTMLDivElement>(null);
   const div2Ref = useRef<HTMLDivElement>(null);
@@ -38,22 +63,32 @@ export default function NiftyLiveBeam() {
         border: "1px solid rgba(255,255,255,0.06)",
       }}
     >
-      {/* Left Circle: logo4 */}
-      <Circle ref={div1Ref} className="p-0">
-        <img
-          src="/images/logo4.png"
-          alt="Nifty50 Logo"
-          className="w-full h-full object-contain scale-[1.4]"
-        />
+      {/* Left Circle */}
+      <Circle ref={div1Ref} className={leftPaddingClass}>
+        <div className="relative w-full h-full">
+          <Image
+            src={leftImg}
+            alt={leftAlt}
+            fill
+            sizes="96px"
+            className={cn("object-contain", leftScaleClass)}
+            priority
+          />
+        </div>
       </Circle>
 
-      {/* Right Circle: logo3 */}
-      <Circle ref={div2Ref}>
-        <img
-          src="/images/logo3.png"
-          alt="NSE Tracker Logo"
-          className="w-full h-full object-contain"
-        />
+      {/* Right Circle */}
+      <Circle ref={div2Ref} className={rightPaddingClass}>
+        <div className="relative w-full h-full">
+          <Image
+            src={rightImg}
+            alt={rightAlt}
+            fill
+            sizes="96px"
+            className={cn("object-contain", rightScaleClass)}
+            priority
+          />
+        </div>
       </Circle>
 
       {/* Beam 1: Left → Right */}
@@ -64,8 +99,8 @@ export default function NiftyLiveBeam() {
         startYOffset={10}
         endYOffset={10}
         curvature={-20}
-        gradientStartColor="#f59e0b"
-        gradientStopColor="#ef4444"
+        gradientStartColor={startColor}
+        gradientStopColor={stopColor}
       />
       {/* Beam 2: Right → Left (reverse) */}
       <AnimatedBeam
@@ -76,8 +111,8 @@ export default function NiftyLiveBeam() {
         endYOffset={-10}
         curvature={20}
         reverse
-        gradientStartColor="#ef4444"
-        gradientStopColor="#f59e0b"
+        gradientStartColor={stopColor}
+        gradientStopColor={startColor}
       />
     </div>
   );

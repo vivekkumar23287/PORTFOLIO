@@ -5,10 +5,6 @@ import { motion, useInView } from "framer-motion";
 import { SectionHeading } from "../ui/SectionHeading";
 import {
   Gamepad2,
-  BookOpen,
-  Music,
-  Camera,
-  Plane,
   Palette,
   Sparkles,
   Zap,
@@ -97,15 +93,6 @@ function InterestCard({
         ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
-    hover: {
-      y: -6,
-      boxShadow: "var(--shadow-lg)",
-      borderColor: "var(--accent)",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut" as const,
-      },
-    },
   };
 
   return (
@@ -114,12 +101,21 @@ function InterestCard({
       variants={cardVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      whileHover="hover"
+      whileHover={{ y: -6 }}
       className="group relative rounded-2xl text-center shadow-md cursor-pointer"
       style={{
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
         padding: "36px",
+        transition: "box-shadow 0.3s ease-out, border-color 0.3s ease-out",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "var(--shadow-lg)";
+        e.currentTarget.style.borderColor = "var(--accent)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "";
+        e.currentTarget.style.borderColor = "";
       }}
     >
       <div className="relative">

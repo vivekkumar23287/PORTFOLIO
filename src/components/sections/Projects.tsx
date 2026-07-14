@@ -2,11 +2,11 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { SectionHeading } from "../ui/SectionHeading";
 import { ExternalLink, Star, MousePointer2 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import SmartCareerBeam from "./SmartCareerBeam";
-import NiftyLiveBeam from "./NiftyLiveBeam";
+import ProjectBeam from "./ProjectBeam";
 
 interface Project {
   title: string;
@@ -184,6 +184,7 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
   const springY = useSpring(mouseY, { stiffness: 150, damping: 20 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return;
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left);
     mouseY.set(e.clientY - rect.top);
@@ -217,7 +218,7 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
         onMouseMove={handleMouseMove}
         className="relative z-10 rounded-3xl group overflow-hidden flex flex-col h-full flex-grow shadow-xl"
         style={{
-          x: frontCardX,
+          x: isMobile ? undefined : frontCardX,
           background: "var(--bg-card)",
           border: "1px solid var(--border)",
           padding: isMobile ? "12px 16px 24px 16px" : "12px 36px 36px 36px",
@@ -239,9 +240,28 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
         {project.useBeam ? (
           <div className="w-full shrink-0">
             {project.title === "Smart Career Automation System" ? (
-              <SmartCareerBeam />
+              <ProjectBeam
+                leftImg="/images/ADMIN.png"
+                leftAlt="Admin Portal"
+                leftScaleClass="rounded-full"
+                rightImg="/images/Logo.png"
+                rightAlt="Smart Career Logo"
+                rightScaleClass="rounded-full scale-[1.7]"
+                rightPaddingClass="p-0"
+                startColor="#6366f1"
+                stopColor="#10b981"
+              />
             ) : (
-              <NiftyLiveBeam />
+              <ProjectBeam
+                leftImg="/images/logo4.png"
+                leftAlt="Nifty50 Logo"
+                leftScaleClass="scale-[1.4]"
+                leftPaddingClass="p-0"
+                rightImg="/images/logo3.png"
+                rightAlt="NSE Tracker Logo"
+                startColor="#f59e0b"
+                stopColor="#ef4444"
+              />
             )}
           </div>
         ) : (
@@ -250,12 +270,16 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
             style={{ background: project.gradient }}
           >
             {project.logo ? (
-              <div className="z-10 flex size-24 sm:size-36 items-center justify-center rounded-full border border-gray-100 bg-white p-2 shadow-lg overflow-hidden">
-                <img
-                  src={project.logo}
-                  alt={`${project.title} Logo`}
-                  className="w-full h-full object-contain rounded-full"
-                />
+              <div className="z-10 flex size-24 sm:size-36 items-center justify-center rounded-full border border-gray-100 bg-white p-2 shadow-lg overflow-hidden relative">
+                <div className="relative w-full h-full">
+                  <Image
+                    src={project.logo}
+                    alt={`${project.title} Logo`}
+                    fill
+                    sizes="(max-width: 640px) 96px, 144px"
+                    className="object-contain rounded-full"
+                  />
+                </div>
               </div>
             ) : (
               <span className="text-8xl">{project.emoji}</span>
@@ -343,9 +367,16 @@ function FeaturedProjectCard({ project, index }: { project: Project, index?: num
                 style={{
                   border: "1.5px solid var(--border-hover)",
                   color: "var(--text-primary)",
-                  padding: "10px 24px"
+                  padding: "10px 24px",
+                  transition: "border-color 0.3s ease",
                 }}
-                whileHover={{ scale: 1.05, y: -2, borderColor: "var(--accent)" }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "";
+                }}
                 whileTap={{ scale: 0.97 }}
               >
                 <SiGithub style={{ fontSize: 16 }} /> Source Code
@@ -370,12 +401,15 @@ function ScreenshotGallery({ images }: { images: string[] }) {
       onMouseLeave={() => setActiveImg(3)}
     >
       {images.map((src, idx) => (
-        <img
+        <Image
           key={idx}
           src={src}
           alt={`Screenshot preview ${idx + 1}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 500px"
           className="absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ease-in-out"
           style={{ opacity: activeImg === idx ? 1 : 0 }}
+          priority={idx === 3}
         />
       ))}
 

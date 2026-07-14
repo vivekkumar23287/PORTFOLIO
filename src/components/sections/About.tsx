@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import { SectionHeading, Reveal } from "../ui/SectionHeading";
 import { Code2, Coffee, Rocket, Heart } from "lucide-react";
 
@@ -14,7 +15,7 @@ const badges = [
 
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
 
   return (
     <section
@@ -56,9 +57,13 @@ export default function About() {
                 }}
               >
 
-                <div
-                  className="absolute inset-0 bg-contain bg-bottom bg-no-repeat"
-                  style={{ backgroundImage: "url('/images/USER IMAGE 2.png')" }}
+                <Image
+                  src="/images/USER IMAGE 2.png"
+                  alt="Vivek Kumar Profile"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 450px"
+                  className="object-contain object-bottom"
                 />
 
 
@@ -128,12 +133,19 @@ export default function About() {
                       color: "var(--text-primary)",
                       boxShadow: "var(--shadow-sm)",
                       padding: "10px 20px",
+                      transition: "box-shadow 0.3s ease, border-color 0.3s ease",
                     }}
                     whileHover={{
                       scale: 1.03,
                       y: -4,
-                      borderColor: "var(--accent)",
-                      boxShadow: "var(--shadow-md)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "var(--accent)";
+                      e.currentTarget.style.boxShadow = "var(--shadow-md)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "";
+                      e.currentTarget.style.boxShadow = "var(--shadow-sm)";
                     }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   >

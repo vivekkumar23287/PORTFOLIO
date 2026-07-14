@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ArrowDown, Mail, Sparkles } from "lucide-react";
 
@@ -16,8 +16,18 @@ const roles = [
 export default function Hero({ onHireMe }: { onHireMe: () => void }) {
   const heroRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
   const [roleIndex, setRoleIndex] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const [randomPaths, setRandomPaths] = useState(() =>
     Array.from({ length: 10 }).map(() => ({
@@ -52,23 +62,18 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
-  const springX = useSpring(cursorX, { stiffness: 50, damping: 20 });
-  const springY = useSpring(cursorY, { stiffness: 50, damping: 20 });
-
-
   useEffect(() => {
+    const bgEl = bgRef.current;
+    if (!bgEl) return;
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      setMousePos({ x, y });
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+      bgEl.style.setProperty("--mouse-x", `${x}`);
+      bgEl.style.setProperty("--mouse-y", `${y}`);
     };
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [cursorX, cursorY]);
+  }, []);
 
 
   useEffect(() => {
@@ -169,14 +174,15 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
     >
 
       <div
+        ref={bgRef}
         className="absolute inset-0 transition-transform duration-[2000ms] ease-out"
         style={{
           background: `
-            radial-gradient(600px circle at ${50 + mousePos.x * 8}% ${50 + mousePos.y * 8}%, var(--accent-glow) 0%, transparent 60%),
-            radial-gradient(800px circle at ${70 + mousePos.x * 5}% ${30 + mousePos.y * 5}%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
-            radial-gradient(400px circle at ${30 - mousePos.x * 3}% ${70 - mousePos.y * 3}%, rgba(236, 72, 153, 0.04) 0%, transparent 60%)
+            radial-gradient(600px circle at calc(50% + var(--mouse-x, 0) * 8%) calc(50% + var(--mouse-y, 0) * 8%), var(--accent-glow) 0%, transparent 60%),
+            radial-gradient(800px circle at calc(70% + var(--mouse-x, 0) * 5%) calc(30% + var(--mouse-y, 0) * 5%), rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+            radial-gradient(400px circle at calc(30% - var(--mouse-x, 0) * 3%) calc(70% - var(--mouse-y, 0) * 3%), rgba(236, 72, 153, 0.04) 0%, transparent 60%)
           `,
-        }}
+        } as React.CSSProperties}
       />
 
 
@@ -192,125 +198,129 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
       />
 
 
-      <motion.div
-        className="hero-floating-element absolute top-[10%] left-[10%] w-20 h-20 rounded-2xl opacity-20"
-        style={{ background: "var(--gradient-accent)" }}
-        animate={{
-          x: randomPaths[0].x,
-          y: randomPaths[0].y,
-          rotate: randomPaths[0].rotate,
-        }}
-        transition={{ duration: randomPaths[0].duration, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="hero-floating-element absolute top-[20%] right-[15%] w-3 h-3 rounded-full"
-        style={{ background: "var(--accent)" }}
-        animate={{
-          x: randomPaths[1].x,
-          y: randomPaths[1].y,
-        }}
-        transition={{ duration: randomPaths[1].duration, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="hero-floating-element absolute bottom-[15%] left-[20%] w-4 h-4 rounded-full opacity-30"
-        style={{ background: "var(--accent)" }}
-        animate={{
-          x: randomPaths[2].x,
-          y: randomPaths[2].y,
-        }}
-        transition={{ duration: randomPaths[2].duration, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="hero-floating-element absolute bottom-[20%] right-[10%] w-16 h-16 rounded-xl opacity-10"
-        style={{ border: "2px solid var(--accent)" }}
-        animate={{
-          x: randomPaths[3].x,
-          y: randomPaths[3].y,
-          rotate: randomPaths[3].rotate,
-        }}
-        transition={{ duration: randomPaths[3].duration, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="hero-floating-element absolute top-[50%] left-[5%] w-2 h-2 rounded-full opacity-40"
-        style={{ background: "var(--accent)" }}
-        animate={{
-          x: randomPaths[4].x,
-          y: randomPaths[4].y,
-        }}
-        transition={{ duration: randomPaths[4].duration, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="hero-floating-element absolute top-[15%] right-[30%] w-6 h-6 rounded-lg opacity-15"
-        style={{ background: "var(--gradient-accent)" }}
-        animate={{
-          x: randomPaths[5].x,
-          y: randomPaths[5].y,
-          rotate: randomPaths[5].rotate,
-        }}
-        transition={{ duration: randomPaths[5].duration, repeat: Infinity, ease: "linear" }}
-      />
+      {!isMobile && (
+        <>
+          <motion.div
+            className="hero-floating-element absolute top-[10%] left-[10%] w-20 h-20 rounded-2xl opacity-20"
+            style={{ background: "var(--gradient-accent)" }}
+            animate={{
+              x: randomPaths[0].x,
+              y: randomPaths[0].y,
+              rotate: randomPaths[0].rotate,
+            }}
+            transition={{ duration: randomPaths[0].duration, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="hero-floating-element absolute top-[20%] right-[15%] w-3 h-3 rounded-full"
+            style={{ background: "var(--accent)" }}
+            animate={{
+              x: randomPaths[1].x,
+              y: randomPaths[1].y,
+            }}
+            transition={{ duration: randomPaths[1].duration, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="hero-floating-element absolute bottom-[15%] left-[20%] w-4 h-4 rounded-full opacity-30"
+            style={{ background: "var(--accent)" }}
+            animate={{
+              x: randomPaths[2].x,
+              y: randomPaths[2].y,
+            }}
+            transition={{ duration: randomPaths[2].duration, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="hero-floating-element absolute bottom-[20%] right-[10%] w-16 h-16 rounded-xl opacity-10"
+            style={{ border: "2px solid var(--accent)" }}
+            animate={{
+              x: randomPaths[3].x,
+              y: randomPaths[3].y,
+              rotate: randomPaths[3].rotate,
+            }}
+            transition={{ duration: randomPaths[3].duration, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="hero-floating-element absolute top-[50%] left-[5%] w-2 h-2 rounded-full opacity-40"
+            style={{ background: "var(--accent)" }}
+            animate={{
+              x: randomPaths[4].x,
+              y: randomPaths[4].y,
+            }}
+            transition={{ duration: randomPaths[4].duration, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="hero-floating-element absolute top-[15%] right-[30%] w-6 h-6 rounded-lg opacity-15"
+            style={{ background: "var(--gradient-accent)" }}
+            animate={{
+              x: randomPaths[5].x,
+              y: randomPaths[5].y,
+              rotate: randomPaths[5].rotate,
+            }}
+            transition={{ duration: randomPaths[5].duration, repeat: Infinity, ease: "linear" }}
+          />
 
 
-      <motion.div
-        className="hero-floating-element absolute top-[30%] left-[35%] opacity-15"
-        style={{ color: "#10b981" }}
-        animate={{
-          x: randomPaths[6].x,
-          y: randomPaths[6].y,
-          rotate: randomPaths[6].rotate,
-        }}
-        transition={{ duration: randomPaths[6].duration, repeat: Infinity, ease: "linear" }}
-      >
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2L2 22h20L12 2z" />
-        </svg>
-      </motion.div>
+          <motion.div
+            className="hero-floating-element absolute top-[30%] left-[35%] opacity-15"
+            style={{ color: "#10b981" }}
+            animate={{
+              x: randomPaths[6].x,
+              y: randomPaths[6].y,
+              rotate: randomPaths[6].rotate,
+            }}
+            transition={{ duration: randomPaths[6].duration, repeat: Infinity, ease: "linear" }}
+          >
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 22h20L12 2z" />
+            </svg>
+          </motion.div>
 
 
-      <motion.div
-        className="hero-floating-element absolute top-[45%] right-[25%] w-24 h-8 rounded-full shadow-2xl"
-        style={{
-          background: "var(--glass-bg)",
-          border: "1px solid var(--border)",
-          backdropFilter: "blur(16px)"
-        }}
-        animate={{
-          x: randomPaths[7].x,
-          y: randomPaths[7].y,
-          rotate: randomPaths[7].rotate,
-        }}
-        transition={{ duration: randomPaths[7].duration, repeat: Infinity, ease: "linear" }}
-      />
+          <motion.div
+            className="hero-floating-element absolute top-[45%] right-[25%] w-24 h-8 rounded-full shadow-2xl"
+            style={{
+              background: "var(--glass-bg)",
+              border: "1px solid var(--border)",
+              backdropFilter: "blur(16px)"
+            }}
+            animate={{
+              x: randomPaths[7].x,
+              y: randomPaths[7].y,
+              rotate: randomPaths[7].rotate,
+            }}
+            transition={{ duration: randomPaths[7].duration, repeat: Infinity, ease: "linear" }}
+          />
 
 
-      <motion.div
-        className="hero-floating-element absolute top-[20%] left-[20%] w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{
-          background: "var(--accent)",
-          opacity: 0.05,
-          filter: "blur(100px)",
-        }}
-        animate={{
-          x: randomPaths[8].x,
-          y: randomPaths[8].y,
-        }}
-        transition={{ duration: randomPaths[8].duration * 1.5, repeat: Infinity, ease: "linear" }}
-      />
+          <motion.div
+            className="hero-floating-element absolute top-[20%] left-[20%] w-[400px] h-[400px] rounded-full pointer-events-none"
+            style={{
+              background: "var(--accent)",
+              opacity: 0.05,
+              filter: "blur(100px)",
+            }}
+            animate={{
+              x: randomPaths[8].x,
+              y: randomPaths[8].y,
+            }}
+            transition={{ duration: randomPaths[8].duration * 1.5, repeat: Infinity, ease: "linear" }}
+          />
 
 
-      <motion.div
-        className="hero-floating-element absolute bottom-[10%] right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background: "var(--gradient-accent)",
-          opacity: 0.04,
-          filter: "blur(120px)",
-        }}
-        animate={{
-          x: randomPaths[9].x,
-          y: randomPaths[9].y,
-        }}
-        transition={{ duration: randomPaths[9].duration * 1.5, repeat: Infinity, ease: "linear" }}
-      />
+          <motion.div
+            className="hero-floating-element absolute bottom-[10%] right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{
+              background: "var(--gradient-accent)",
+              opacity: 0.04,
+              filter: "blur(120px)",
+            }}
+            animate={{
+              x: randomPaths[9].x,
+              y: randomPaths[9].y,
+            }}
+            transition={{ duration: randomPaths[9].duration * 1.5, repeat: Infinity, ease: "linear" }}
+          />
+        </>
+      )}
 
 
       <div className="section-container relative z-10 text-center">
@@ -351,9 +361,9 @@ export default function Hero({ onHireMe }: { onHireMe: () => void }) {
           <AnimatePresence mode="wait">
             <motion.span
               key={roleIndex}
-              initial={{ y: 20, opacity: 0, filter: "blur(4px)" }}
-              animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-              exit={{ y: -20, opacity: 0, filter: "blur(4px)" }}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-lg md:text-xl font-medium gradient-text block"
             >

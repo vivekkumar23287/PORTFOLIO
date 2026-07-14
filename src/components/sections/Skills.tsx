@@ -138,20 +138,27 @@ export default function Skills() {
             </h3>
             <div className="flex flex-wrap justify-center gap-4" style={{ paddingTop: '60px' }}>
               {skillGroups.flatMap(group => group.skills).map(
-                (skill, i) => (
+                (skill) => (
                   <motion.div
                     key={skill.name}
                     className="group relative w-14 h-14 rounded-xl flex items-center justify-center"
                     style={{
                       background: "var(--bg-card)",
                       border: "1px solid var(--border)",
+                      transition: "border-color 0.3s ease, box-shadow 0.3s ease",
                     }}
                     whileHover={{
                       scale: 1.2,
                       y: -8,
                       rotate: 5,
-                      borderColor: "var(--accent)",
-                      boxShadow: "0 8px 25px var(--accent-glow)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "var(--accent)";
+                      e.currentTarget.style.boxShadow = "0 8px 25px var(--accent-glow)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "";
+                      e.currentTarget.style.boxShadow = "";
                     }}
                     transition={{
                       type: "spring",
@@ -214,8 +221,12 @@ function SkillBar({
       <div className="skill-bar-track mt-4" style={{ height: "8px" }}>
         <motion.div
           className="skill-bar-fill"
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
+          style={{
+            width: `${skill.level}%`,
+            transformOrigin: "left",
+          }}
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{
             duration: 1.2,
             delay: delay + 0.2,

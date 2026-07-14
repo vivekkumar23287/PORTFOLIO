@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { SectionHeading, Reveal } from "../ui/SectionHeading";
 import {
   Send,
   Mail,
   MapPin,
-  ArrowUpRight,
 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
@@ -167,11 +166,17 @@ export default function Contact() {
                       style={{
                         background: "var(--bg-card)",
                         border: "1px solid var(--border)",
+                        transition: "border-color 0.3s ease",
                       }}
                       whileHover={{
                         scale: 1.15,
                         y: -4,
-                        borderColor: "var(--accent)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "var(--accent)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "";
                       }}
                       whileTap={{ scale: 0.95 }}
                     >

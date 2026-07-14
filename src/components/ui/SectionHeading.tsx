@@ -89,12 +89,11 @@ export function Reveal({
       ref={ref}
       initial={{
         opacity: 0,
-        filter: "blur(6px)",
         ...directionMap[direction],
       }}
       animate={
         isInView
-          ? { opacity: 1, y: 0, x: 0, filter: "blur(0px)" }
+          ? { opacity: 1, y: 0, x: 0 }
           : {}
       }
       transition={{

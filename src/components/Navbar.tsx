@@ -21,7 +21,6 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleScroll = useCallback(() => {
@@ -29,7 +28,6 @@ export default function Navbar() {
     setIsScrolled(currentScrollY > 50);
 
     setIsVisible(currentScrollY < window.innerHeight - 100);
-    setLastScrollY(currentScrollY);
 
 
     const sections = navLinks.map((l) => l.href.slice(1));
@@ -43,7 +41,7 @@ export default function Navbar() {
         }
       }
     }
-  }, [lastScrollY]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -65,7 +63,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-[padding,background-color,border-color,box-shadow] duration-500 ${
           isScrolled
             ? "glass shadow-lg py-3"
             : "py-5 bg-transparent"

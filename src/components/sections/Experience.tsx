@@ -99,14 +99,14 @@ export default function Experience() {
         <div className="flex-1 flex flex-col justify-start min-h-0 w-full -mt-4 sm:-mt-8 md:-mt-20">
 
           <motion.div
-            style={{ transform }}
+            style={{ transform, willChange: "transform" }}
             className="experience-track flex items-stretch gap-4 sm:gap-8 md:gap-16 pr-4 sm:pr-6 md:pr-[10vw] relative w-max"
           >
 
             {experiences.map((exp, index) => (
               <div key={index} className="w-[85vw] sm:w-[80vw] md:w-[420px] lg:w-[500px] xl:w-[580px] h-auto min-h-[320px] sm:min-h-[340px] md:min-h-[340px] lg:min-h-[350px] xl:min-h-[360px] shrink-0 flex flex-col">
                 <div className="flex-1 w-full h-full">
-                  <ExperienceCard experience={exp} index={index} />
+                  <ExperienceCard experience={exp} />
                 </div>
               </div>
             ))}
@@ -119,10 +119,8 @@ export default function Experience() {
 
 function ExperienceCard({
   experience: exp,
-  index,
 }: {
   experience: ExperienceItem;
-  index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 

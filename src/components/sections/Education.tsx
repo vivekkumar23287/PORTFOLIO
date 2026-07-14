@@ -88,24 +88,14 @@ function EducationCard({
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
         duration: 0.7,
         delay: index * 0.15,
         ease: [0.25, 0.46, 0.45, 0.94] as const,
-      },
-    },
-    hover: {
-      y: -4,
-      boxShadow: "var(--shadow-lg)",
-      borderColor: "var(--accent)",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut" as const,
       },
     },
   };
@@ -116,12 +106,21 @@ function EducationCard({
       variants={cardVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      whileHover="hover"
+      whileHover={{ y: -4 }}
       className="group relative rounded-3xl shadow-lg cursor-pointer"
       style={{
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
         padding: "36px",
+        transition: "box-shadow 0.3s ease-out, border-color 0.3s ease-out",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "var(--shadow-lg)";
+        e.currentTarget.style.borderColor = "var(--accent)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "";
+        e.currentTarget.style.borderColor = "";
       }}
     >
       <div className="relative">
